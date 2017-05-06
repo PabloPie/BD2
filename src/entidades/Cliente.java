@@ -35,7 +35,7 @@ public class Cliente implements Serializable
 		return dni;
 	}
 
-	public void setIdCliente(String dni)
+	public void setDni(String dni)
 	{
 		this.dni = dni;
 	}
