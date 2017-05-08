@@ -1,13 +1,14 @@
 package entidades;
 
 import java.io.*;
+import javax.annotation.Generated;
 import javax.persistence.*;
 
-@Embeddable
+@Entity
+@Table(name = "OFICINA")
 public class Oficina implements Serializable
 {
-
-	@Id
+	@Id @GeneratedValue
 	@Column(name = "IDOFICINA",nullable = false)
 	private int idoficina;
 
@@ -35,13 +36,12 @@ public class Oficina implements Serializable
 		this.direccion = direccion;
 	}
 
-	public String toString()
-	{
-		StringBuffer sb = new StringBuffer();
-		sb.append("id: " + idoficina);
-		sb.append(", telefono: " + telefono);
-		sb.append(", direccion: " + direccion);
-
-		return sb.toString();
+	@Override
+	public String toString() {
+		return "Oficina{" +
+				"idoficina=" + idoficina +
+				", telefono=" + telefono +
+				", direccion='" + direccion + '\'' +
+				'}';
 	}
 }

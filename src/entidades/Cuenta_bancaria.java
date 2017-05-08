@@ -2,7 +2,6 @@ package entidades;
 
 import javax.persistence.*;
 import java.io.*;
-import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
@@ -21,7 +20,10 @@ public abstract class Cuenta_bancaria implements Serializable
     private java.sql.Date fecha;
 
     @Column(name = "SALDO")
-    private int saldo;
+    private double saldo;
+
+    @ManyToMany(mappedBy = "cuentas",cascade = CascadeType.ALL)
+    private List<Cliente> clientes;
 
     public String getIban() { return iban; }
 
@@ -31,17 +33,31 @@ public abstract class Cuenta_bancaria implements Serializable
 
     public void setFecha(Date fecha) {  this.fecha = fecha; }
 
-    public int getSaldo() {   return saldo;  }
+    public double getSaldo() {   return saldo;  }
 
-    public void setSaldo(int saldo) {   this.saldo = saldo; }
+    public void setSaldo(double saldo) {   this.saldo = saldo; }
 
-    public String toString()
-    {
-        StringBuffer sb = new StringBuffer();
-        sb.append("IBAN: " + iban);
-        sb.append(", fecha: " + fecha);
-        sb.append(", saldo: " + saldo);
 
-        return sb.toString();
+    public List<Cliente> getClientes() {
+        return this.clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    @PrePersist
+    @PreUpdate
+    public void setDate() {
+        this.fecha = new java.sql.Date(System.currentTimeMillis());
+    }
+
+    @Override
+    public String toString() {
+        return "Cuenta_bancaria{" +
+                "iban='" + iban + '\'' +
+                ", fecha=" + fecha +
+                ", saldo=" + saldo +
+                '}';
     }
 }

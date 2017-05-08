@@ -26,6 +26,11 @@ public class Cliente implements Serializable
 	@Column(name = "DIRECCION", length = 50)
 	private String direccion;
 
+	@ManyToMany(cascade = CascadeType.ALL)
+    //@JoinTable(name="CLIENTE_CUENTAS", joinColumns = {@JoinColumn(name="DNI", referencedColumnName = "DNI")},
+    //inverseJoinColumns = {@JoinColumn(name="IBAN", referencedColumnName = "IBAN")})
+	private List<Cuenta_bancaria> cuentas;
+
 	@Version
 	@Column(name = "FECHA_ULTIMA_ACTUALIZACION")
 	private Date ultimaActualizacion;
@@ -89,17 +94,34 @@ public class Cliente implements Serializable
 	{
 		this.edad = edad;
 	}
-	
-	public String toString() 
-	{
-       StringBuffer sb = new StringBuffer();
-       sb.append("DNI: " + dni);
-       sb.append(", nombre: " + nombre);
-       sb.append(", apellidos: " + apellidos);
-       sb.append(", edad: " + edad);
-       sb.append(", email: " + email);
-       sb.append(", direccion: " + direccion);
 
-       return sb.toString();
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Cuenta_bancaria> getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(List<Cuenta_bancaria> cuentas) {
+        this.cuentas = cuentas;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", email='" + email + '\'' +
+                ", edad=" + edad +
+                ", direccion='" + direccion + '\'' +
+                ", Cuentas=" + cuentas +
+                ", ultimaActualizacion=" + ultimaActualizacion +
+                '}';
     }
 }
