@@ -19,7 +19,7 @@ public abstract class Operacion implements Serializable
     private java.sql.Date fecha_hora;
 
     @Column(name = "CANTIDAD")
-    private int cantidad;
+    private double cantidad;
 
     @Column(name = "DESCRIPCION")
     private String descripcion;
@@ -45,11 +45,11 @@ public abstract class Operacion implements Serializable
         this.fecha_hora = fecha_hora;
     }
 
-    public int getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 

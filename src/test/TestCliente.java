@@ -7,82 +7,108 @@ import javafx.beans.binding.ListBinding;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TestCliente 
 {
+
 	public static void main(String[] args) 
 	{
 		EntityManagerFactory entityManagerFactory =  Persistence.createEntityManagerFactory("Banquito");
 		
 		EntityManager em = entityManagerFactory.createEntityManager();
 		EntityTransaction trans = em.getTransaction();
-		
+		String[] abc = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+		String[] tiposCalle = {"Paseo","Calle","Avenida","Cruce"};
+		String[] nombreCalle = {"La bomba","Paraiso","Independencia","El Salvador"};
+		String[] extra = {"escalera","puerta","piso"};
+		String[] nombre = {"Pablo", "Asier", "Jorge", "Alberto", "Juan", "Dario", "David", "Ruben"};
+		String[] apellido = {"Salueña", "Sediles", "Sanz", "Piedrafita", "Castañeda", "Martinez", "Perez", "Sanchez", "Nicuela"};
+		Random r = new Random();
+
+		Oficina[] of = new Oficina[100];
+		Cuenta_ahorro[] cuentasAhorro = new Cuenta_ahorro[100];
+		Cuenta_corriente[] cuentasCorrientes = new Cuenta_corriente[100];
+		Cliente[] clientes1 = new Cliente[100];
+		Cliente[] clientes2 = new Cliente[100];
+		Efectivo[] ef = new Efectivo[100];
+		Transferencia[] tr = new Transferencia[100];
+
 		trans.begin();
 
-		Oficina of = new Oficina();
-		of.setDireccion("Calle de la oficina 12, esc 4ª");
-		of.setTelefono(976543212);
+		for (int i= 0; i<100; i++){
+		    of[i] = new Oficina();
+		    of[i].setDireccion(tiposCalle[r.nextInt(4)]+" "+nombreCalle[r.nextInt(4)]+", "+extra[r.nextInt(3)]+" 1º");
+		    of[i].setTelefono(r.nextInt((999999999 - 800000000) + 1) + 800000000);
+		    em.persist(of[i]);
 
-        em.persist(of);
+            cuentasAhorro[i]= new Cuenta_ahorro();
+            cuentasAhorro[i].setTipo_interes(10 * r.nextDouble());
+            cuentasAhorro[i].setSaldo(10+ (100000 - 10) * r.nextDouble());
+            String iban = "";
+            for(int j=0; j<34 ; j++){
+                iban+=r.nextInt(10);
+            }
+            cuentasAhorro[i].setIban(iban);
 
-		Cuenta_ahorro ca = new Cuenta_ahorro();
-		ca.setTipo_interes(6.45);
-        ca.setSaldo(200.9);
-        ca.setIban("123456781234567812345678123456789A");
+            em.persist(cuentasAhorro[i]);
 
-        em.persist(ca);
+		    cuentasCorrientes[i] = new Cuenta_corriente();
+		    cuentasCorrientes[i].setOficina(of[i]);
+            cuentasCorrientes[i].setSaldo(10+ (100000 - 10) * r.nextDouble());
+            iban = "";
+            for(int j=0; j<34 ; j++){
+                iban+=r.nextInt(10);
+            }
+            cuentasCorrientes[i].setIban(iban);
 
-		Cuenta_corriente cc = new Cuenta_corriente();
-		cc.setOficina(of);
-		cc.setSaldo(100.70);
-		cc.setIban("987654321987654321987654321987654A");
+            em.persist(cuentasCorrientes[i]);
 
-        em.persist(cc);
+            clientes1[i] = new Cliente();
+            clientes1[i].setNombre(nombre[r.nextInt(8)]);
+            clientes1[i].setApellidos(apellido[r.nextInt(9)]);
+            clientes1[i].setDni((r.nextInt((99999999 - 10000000)+1)+10000000)+abc[r.nextInt(26)]);
+            clientes1[i].setDireccion(tiposCalle[r.nextInt(4)]+" "+nombreCalle[r.nextInt(4)]+", "+extra[r.nextInt(3)]+" 1º");
+            clientes1[i].setEdad(r.nextInt((100 - 16) + 1) + 16);
+            List<Cuenta_bancaria> cuentas = new ArrayList<Cuenta_bancaria>();
+            cuentas.add(cuentasCorrientes[i]);
+            cuentas.add(cuentasAhorro[i]);
+            clientes1[i].setCuentas(cuentas);
 
-        Cliente cliente = new Cliente();
-        cliente.setNombre("Paolo");
-        cliente.setApellidos("Blopo Tropo");
-        cliente.setDni("53047174V");
-        cliente.setDireccion("Calle de ningún lado 12, puerta 3");
-        cliente.setEdad(25);
-        List<Cuenta_bancaria> cuentas = new ArrayList<Cuenta_bancaria>();
-        cuentas.add(cc);
-        cuentas.add(ca);
-        cliente.setCuentas(cuentas);
+            em.persist(clientes1[i]);
 
-        em.persist(cliente);
+            clientes2[i] = new Cliente();
+            clientes2[i].setNombre(nombre[r.nextInt(8)]);
+            clientes2[i].setApellidos(apellido[r.nextInt(9)]);
+            clientes2[i].setDni((r.nextInt((99999999 - 10000000)+1)+10000000)+abc[r.nextInt(26)]);
+            clientes2[i].setDireccion(tiposCalle[r.nextInt(4)]+" "+nombreCalle[r.nextInt(4)]+", "+extra[r.nextInt(3)]+" 1º");
+            clientes2[i].setEdad(r.nextInt((100 - 16) + 1) + 16);
+            cuentas = new ArrayList<Cuenta_bancaria>();
+            cuentas.add(cuentasCorrientes[i]);
+            clientes2[i].setCuentas(cuentas);
 
-        Cliente cliente2 = new Cliente();
-        cliente2.setNombre("Asierto");
-        cliente2.setApellidos("Pussier Lueño");
-        cliente2.setDni("17348874V");
-        cliente2.setDireccion("Calle de algún lado 12");
-        cliente2.setEdad(42);
-        List<Cuenta_bancaria> cuentas2 = new ArrayList<Cuenta_bancaria>();
-        cuentas2.add(cc);
-        cliente2.setCuentas(cuentas2);
+            em.persist(clientes2[i]);
 
-        em.persist(cliente2);
+            ef[i] = new Efectivo();
+            ef[i].setOficina(of[i]);
+            ef[i].setCantidad(5000*r.nextDouble());
+            ef[i].setDescripcion("Efectivo nº"+i);
+            ef[i].setIban_origen(cuentasAhorro[i]);
 
-        Efectivo ef = new Efectivo();
-        ef.setOficina(of);
-        ef.setCantidad(200);
-        ef.setDescripcion("Transaccion efectiva de prueba");
-        ef.setIban_origen(ca);
+            em.persist(ef[i]);
 
-        em.persist(ef);
+            tr[i] = new Transferencia();
+            tr[i].setIban_receptora(cuentasAhorro[i]);
+            tr[i].setIban_origen(cuentasCorrientes[i]);
+            tr[i].setCantidad(5000*r.nextDouble());
+            tr[i].setDescripcion("Transferencia nº"+i);
 
-        Transferencia tr = new Transferencia();
-        tr.setIban_receptora(ca);
-        tr.setIban_origen(cc);
-        tr.setCantidad(50);
-        tr.setDescripcion("Transferencia de prueba");
+            em.persist(tr[i]);
+        }
 
-        em.persist(tr);
+        trans.commit();
+        em.close();
+        entityManagerFactory.close();
 
-
-		trans.commit();
-		em.close();
-		entityManagerFactory.close();		
 	}
 }
