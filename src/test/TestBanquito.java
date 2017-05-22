@@ -2,14 +2,11 @@ package test;
 
 import javax.persistence.*;
 import entidades.*;
-import javafx.beans.binding.ListBinding;
-
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TestCliente 
+public class TestBanquito
 {
 
 	public static void main(String[] args) 

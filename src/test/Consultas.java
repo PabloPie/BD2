@@ -14,7 +14,7 @@ public class Consultas
 
     public static void main(String[] args)
     {
-        EntityManagerFactory entityManagerFactory =  Persistence.createEntityManagerFactory("Banquito");
+        /*EntityManagerFactory entityManagerFactory =  Persistence.createEntityManagerFactory("Banquito");
 
         EntityManager em = entityManagerFactory.createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -22,7 +22,7 @@ public class Consultas
 
         trans.commit();
         em.close();
-        entityManagerFactory.close();
+        entityManagerFactory.close();*/
 
     }
 }
