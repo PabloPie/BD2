@@ -27,8 +27,8 @@ public class Transferencia extends Operacion implements Serializable
                 ", fecha_hora=" + getFecha_hora() +
                 ", cantidad=" + getCantidad() +
                 ", descripcion='" + getDescripcion() + '\'' +
-                ", iban_origen=" + getIban_origen() +
-                ", iban_receptora=" + iban_receptora +
+                ", iban_origen=" + getIban_origen().getIban() +
+                ", iban_receptora=" + iban_receptora.getIban() +
                 '}';
     }
 }

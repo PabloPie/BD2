@@ -22,8 +22,7 @@ public class Cuenta_corriente extends Cuenta_bancaria implements Serializable
                 ", tipo_cuenta= Cuenta_corriente" +
                 ", fecha=" + getFecha() +
                 ", saldo=" + getSaldo() +
-                ", idoficina=" + oficina +
-                ", clientes=" + getClientes() +
+                ", idoficina=" + oficina.getIdOficina() +
                 '}';
     }
 }

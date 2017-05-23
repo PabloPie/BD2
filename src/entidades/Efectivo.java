@@ -22,13 +22,13 @@ public class Efectivo extends Operacion implements Serializable
     @Override
     public String toString() {
 
-        return "Transferencia{" +
+        return "Efectivo{" +
                 "idoperacion=" + getIdoperacion() +
                 ", fecha_hora=" + getFecha_hora() +
                 ", cantidad=" + getCantidad() +
                 ", descripcion='" + getDescripcion() + '\'' +
                 ", iban_origen=" + getIban_origen() +
-                ", oficina=" + oficina +
+                ", oficina=" + oficina.getIdOficina() +
                 '}';
     }
 }

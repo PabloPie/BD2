@@ -5,8 +5,7 @@ import java.io.*;
 import java.sql.Date;
 import java.util.*;
 
-@Entity
-@Table(name = "CUENTAS")
+@Entity(name = "CUENTAS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TIPO_CUENTA")
 

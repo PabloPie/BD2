@@ -120,7 +120,6 @@ public class Cliente implements Serializable
                 ", email='" + email + '\'' +
                 ", edad=" + edad +
                 ", direccion='" + direccion + '\'' +
-                ", Cuentas=" + cuentas +
                 ", ultimaActualizacion=" + ultimaActualizacion +
                 '}';
     }

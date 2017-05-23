@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.io.*;
 import java.sql.Date;
 
-@Entity
-@Table(name = "OPERACIONES")
+@Entity(name = "OPERACIONES")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TIPO_OPERACION")
 
@@ -82,7 +81,7 @@ public abstract class Operacion implements Serializable
                 ", fecha_hora=" + fecha_hora +
                 ", cantidad=" + cantidad +
                 ", descripcion='" + descripcion + '\'' +
-                ", iban_origen=" + iban_origen +
+                ", iban_origen=" + iban_origen.getIban() +
                 '}';
     }
 }

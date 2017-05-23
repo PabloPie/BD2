@@ -23,7 +23,6 @@ public class Cuenta_ahorro extends Cuenta_bancaria implements Serializable
                 ", fecha=" + getFecha() +
                 ", saldo=" + getSaldo() +
                 ", tipo_interes=" + tipo_interes +
-                ", clientes=" + getClientes() +
                 '}';
     }
 }

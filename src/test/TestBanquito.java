@@ -99,9 +99,16 @@ public class TestBanquito
             tr[i].setIban_origen(cuentasCorrientes[i]);
             tr[i].setCantidad(5000*r.nextDouble());
             tr[i].setDescripcion("Transferencia nº"+i);
-
             em.persist(tr[i]);
         }
+
+        Efectivo e = new Efectivo();
+        e.setIban_origen(cuentasCorrientes[4]);
+        e.setDescripcion("Operacion rara");
+        e.setCantidad(1.2);
+        e.setOficina(of[13]);
+
+        em.persist(e);
 
         trans.commit();
         em.close();
