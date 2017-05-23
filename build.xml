@@ -64,4 +64,10 @@
         </java>
     </target>
 
+    <target name="query">
+        <java classname="test.Consultas" classpathref="libraries">
+            <classpath path="${targetdir}"/>
+        </java>
+    </target>
+
 </project>
